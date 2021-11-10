@@ -15,4 +15,4 @@ $ yarn start
 ```
 
 ## poetry 설치 방법
-[사이트](https://python-poetry.org/docs/#installation) 참조
+[공식 사이트](https://python-poetry.org/docs/#installation) 참조
