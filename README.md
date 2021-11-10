@@ -5,7 +5,7 @@
 # ----- python -----
 $ cd python
 $ poetry install
-$ sh ./proto/generate.sh
+$ sh ./generate.sh
 $ poetry run start
 
 # ----- node -----
