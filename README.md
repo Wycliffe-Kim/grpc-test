@@ -1,6 +1,6 @@
 # grpc-test
 
-## 테스트 코드 수행 방법
+## Running Test Code
 ```
 # ----- python -----
 $ cd python
@@ -14,5 +14,5 @@ $ yarn
 $ yarn start
 ```
 
-## poetry 설치 방법
+## Installing Poetry
 [공식 사이트](https://python-poetry.org/docs/#installation) 참조
