@@ -1,17 +1,37 @@
-import grpc from 'grpc';
-import { TestServiceClient } from './proto/test_grpc_pb';
-import { TestRequest } from './proto/test_pb';
+const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
+
+const PROTO_PATH = '../proto/test.proto';
+
+function packageDefinition() {
+  return protoLoader.loadSync(
+    PROTO_PATH,
+    {
+      keepCase: true,
+      longs: String,
+      enums: String,
+      defaults: true,
+      oneofs: true,
+    }
+  );
+}
+
+function testProto() {
+  return grpc.loadPackageDefinition(packageDefinition());
+}
 
 function main() {
   const address = 'localhost:7070';
-  const client = new TestServiceClient(address, grpc.credentials.createInsecure());
-  const request = new TestRequest();
-  request.setId(1);
-  request.setName('Wycliffe Kim');
-  console.log(`----- grpc client start ${address} -----`);
-  client.request(request, (error, response) => {
-    console.log('error', error);
-    console.log('response', response);
+  const testproto = testProto();
+  const client = new testproto.TestService(address, grpc.credentials.createInsecure());
+  client.request({ id: 1, name: 'Wycliffe Kim' }, (error: any, response: any) => {
+    if (error) {
+      console.error(error);
+    }
+
+    if (response) {
+      console.log(`id: ${response.id}, name: ${response.name}, message: ${response.message}`);
+    }
   });
 }
 
