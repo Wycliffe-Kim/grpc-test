@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import test_pb2 as test__pb2
+import camera_pb2 as camera__pb2
 
 
-class TestServiceStub(object):
+class CameraServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,58 +14,58 @@ class TestServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.request = channel.unary_unary(
-                '/TestService/request',
-                request_serializer=test__pb2.TestRequest.SerializeToString,
-                response_deserializer=test__pb2.TestResponse.FromString,
+        self.get_camera = channel.unary_unary(
+                '/CameraService/get_camera',
+                request_serializer=camera__pb2.CameraRequest.SerializeToString,
+                response_deserializer=camera__pb2.CameraData.FromString,
                 )
-        self.request_stream = channel.unary_stream(
-                '/TestService/request_stream',
-                request_serializer=test__pb2.TestRequest.SerializeToString,
-                response_deserializer=test__pb2.TestResponse.FromString,
+        self.get_cameras = channel.unary_unary(
+                '/CameraService/get_cameras',
+                request_serializer=camera__pb2.CameraRequest.SerializeToString,
+                response_deserializer=camera__pb2.CameraResponse.FromString,
                 )
 
 
-class TestServiceServicer(object):
+class CameraServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def request(self, request, context):
+    def get_camera(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def request_stream(self, request, context):
+    def get_cameras(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_TestServiceServicer_to_server(servicer, server):
+def add_CameraServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'request': grpc.unary_unary_rpc_method_handler(
-                    servicer.request,
-                    request_deserializer=test__pb2.TestRequest.FromString,
-                    response_serializer=test__pb2.TestResponse.SerializeToString,
+            'get_camera': grpc.unary_unary_rpc_method_handler(
+                    servicer.get_camera,
+                    request_deserializer=camera__pb2.CameraRequest.FromString,
+                    response_serializer=camera__pb2.CameraData.SerializeToString,
             ),
-            'request_stream': grpc.unary_stream_rpc_method_handler(
-                    servicer.request_stream,
-                    request_deserializer=test__pb2.TestRequest.FromString,
-                    response_serializer=test__pb2.TestResponse.SerializeToString,
+            'get_cameras': grpc.unary_unary_rpc_method_handler(
+                    servicer.get_cameras,
+                    request_deserializer=camera__pb2.CameraRequest.FromString,
+                    response_serializer=camera__pb2.CameraResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'TestService', rpc_method_handlers)
+            'CameraService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class TestService(object):
+class CameraService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def request(request,
+    def get_camera(request,
             target,
             options=(),
             channel_credentials=None,
@@ -75,14 +75,14 @@ class TestService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/TestService/request',
-            test__pb2.TestRequest.SerializeToString,
-            test__pb2.TestResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/CameraService/get_camera',
+            camera__pb2.CameraRequest.SerializeToString,
+            camera__pb2.CameraData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def request_stream(request,
+    def get_cameras(request,
             target,
             options=(),
             channel_credentials=None,
@@ -92,8 +92,8 @@ class TestService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/TestService/request_stream',
-            test__pb2.TestRequest.SerializeToString,
-            test__pb2.TestResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/CameraService/get_cameras',
+            camera__pb2.CameraRequest.SerializeToString,
+            camera__pb2.CameraResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

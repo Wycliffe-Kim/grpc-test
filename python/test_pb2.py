@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ntest.proto\"\'\n\x0bTestRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"9\n\x0cTestResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t27\n\x0bTestService\x12(\n\x07request\x12\x0c.TestRequest\x1a\r.TestResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\ntest.proto\"\'\n\x0bTestRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"E\n\x0cTestResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\n\n\x02li\x18\x04 \x03(\x05\x32j\n\x0bTestService\x12(\n\x07request\x12\x0c.TestRequest\x1a\r.TestResponse\"\x00\x12\x31\n\x0erequest_stream\x12\x0c.TestRequest\x1a\r.TestResponse\"\x00\x30\x01\x62\x06proto3'
 )
 
 
@@ -93,6 +93,13 @@ _TESTRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='li', full_name='TestResponse.li', index=3,
+      number=4, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -106,7 +113,7 @@ _TESTRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=55,
-  serialized_end=112,
+  serialized_end=124,
 )
 
 DESCRIPTOR.message_types_by_name['TestRequest'] = _TESTREQUEST
@@ -136,13 +143,23 @@ _TESTSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=114,
-  serialized_end=169,
+  serialized_start=126,
+  serialized_end=232,
   methods=[
   _descriptor.MethodDescriptor(
     name='request',
     full_name='TestService.request',
     index=0,
+    containing_service=None,
+    input_type=_TESTREQUEST,
+    output_type=_TESTRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='request_stream',
+    full_name='TestService.request_stream',
+    index=1,
     containing_service=None,
     input_type=_TESTREQUEST,
     output_type=_TESTRESPONSE,

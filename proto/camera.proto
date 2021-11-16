@@ -1,0 +1,29 @@
+syntax="proto3";
+
+service CameraService {
+  rpc get_camera(CameraRequest) returns (CameraData) {}
+  rpc get_cameras(CameraRequest) returns (CameraResponse) {}
+}
+
+message CameraRequest {
+  int32 id = 1;
+}
+
+message CameraResponse {
+  repeated CameraData data = 1;
+}
+
+message CameraPosition {
+  float latitude = 1;
+  float longitude = 2;
+}
+
+message CameraData {
+  int32 id = 1;
+  string name = 2;
+  CameraPosition position = 3;
+  string rtsp_address = 4;
+  int32 rtsp_port = 5;
+  string rtsp_connection_id = 6;
+  string rtsp_connection_pw = 7;
+}

@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import test_pb2 as test__pb2
+import scenario_pb2 as scenario__pb2
 
 
-class TestServiceStub(object):
+class ScenarioServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,58 +14,58 @@ class TestServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.request = channel.unary_unary(
-                '/TestService/request',
-                request_serializer=test__pb2.TestRequest.SerializeToString,
-                response_deserializer=test__pb2.TestResponse.FromString,
+        self.get_scenario = channel.unary_unary(
+                '/ScenarioService/get_scenario',
+                request_serializer=scenario__pb2.ScenarioRequest.SerializeToString,
+                response_deserializer=scenario__pb2.ScenarioData.FromString,
                 )
-        self.request_stream = channel.unary_stream(
-                '/TestService/request_stream',
-                request_serializer=test__pb2.TestRequest.SerializeToString,
-                response_deserializer=test__pb2.TestResponse.FromString,
+        self.get_scenarios = channel.unary_unary(
+                '/ScenarioService/get_scenarios',
+                request_serializer=scenario__pb2.ScenarioRequest.SerializeToString,
+                response_deserializer=scenario__pb2.ScenarioResponse.FromString,
                 )
 
 
-class TestServiceServicer(object):
+class ScenarioServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def request(self, request, context):
+    def get_scenario(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def request_stream(self, request, context):
+    def get_scenarios(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_TestServiceServicer_to_server(servicer, server):
+def add_ScenarioServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'request': grpc.unary_unary_rpc_method_handler(
-                    servicer.request,
-                    request_deserializer=test__pb2.TestRequest.FromString,
-                    response_serializer=test__pb2.TestResponse.SerializeToString,
+            'get_scenario': grpc.unary_unary_rpc_method_handler(
+                    servicer.get_scenario,
+                    request_deserializer=scenario__pb2.ScenarioRequest.FromString,
+                    response_serializer=scenario__pb2.ScenarioData.SerializeToString,
             ),
-            'request_stream': grpc.unary_stream_rpc_method_handler(
-                    servicer.request_stream,
-                    request_deserializer=test__pb2.TestRequest.FromString,
-                    response_serializer=test__pb2.TestResponse.SerializeToString,
+            'get_scenarios': grpc.unary_unary_rpc_method_handler(
+                    servicer.get_scenarios,
+                    request_deserializer=scenario__pb2.ScenarioRequest.FromString,
+                    response_serializer=scenario__pb2.ScenarioResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'TestService', rpc_method_handlers)
+            'ScenarioService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class TestService(object):
+class ScenarioService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def request(request,
+    def get_scenario(request,
             target,
             options=(),
             channel_credentials=None,
@@ -75,14 +75,14 @@ class TestService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/TestService/request',
-            test__pb2.TestRequest.SerializeToString,
-            test__pb2.TestResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/ScenarioService/get_scenario',
+            scenario__pb2.ScenarioRequest.SerializeToString,
+            scenario__pb2.ScenarioData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def request_stream(request,
+    def get_scenarios(request,
             target,
             options=(),
             channel_credentials=None,
@@ -92,8 +92,8 @@ class TestService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/TestService/request_stream',
-            test__pb2.TestRequest.SerializeToString,
-            test__pb2.TestResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/ScenarioService/get_scenarios',
+            scenario__pb2.ScenarioRequest.SerializeToString,
+            scenario__pb2.ScenarioResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -1,0 +1,21 @@
+syntax="proto3";
+
+service ObjectService {
+  rpc streaming_object(ObjectRequest) returns (stream ObjectData) {}
+}
+
+message ObjectRequest {
+
+}
+
+message ObjectData {
+  int32 id = 1;
+  ObjectCoordinate coordinate = 2;
+  repeated ObjectCoordinate trajectory = 3;
+  repeated ObjectCoordinate prediction_path = 4;
+}
+
+message ObjectCoordinate {
+  float x = 1;
+  float y = 2;
+}

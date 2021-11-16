@@ -1,0 +1,16 @@
+syntax="proto3";
+
+service EventService {
+  rpc streaming_event(EventRequest) returns (stream EventData) {}
+}
+
+message EventRequest {
+
+}
+
+message EventData {
+  string occurred_time = 1;
+  repeated int32 object_id_list = 2;
+  int32 camera_id = 3;
+  int32 scenario_id = 4;
+}
