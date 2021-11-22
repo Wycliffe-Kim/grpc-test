@@ -1,23 +1,5 @@
 syntax="proto3";
 
-service ScenarioService {
-  rpc get_scenario(ScenarioRequest) returns (ScenarioData) {}
-  rpc get_scenarios(ScenarioRequest) returns (ScenarioResponse) {}
-}
-
-message ScenarioRequest {
-  int32 id = 1;
-}
-
-message ScenarioResponse {
-  repeated ScenarioData data = 1;
-}
-
-message ScenarioData {
-  int32 id = 1;
-  ScenarioType type = 2;
-}
-
 enum ScenarioType {
   ACCIDENT = 0;
   // 시나리오 정의 필요

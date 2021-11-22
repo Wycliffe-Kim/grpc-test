@@ -1,5 +1,8 @@
 syntax="proto3";
 
+import "object.proto";
+import "scenario.proto";
+
 service EventService {
   rpc streaming_event(EventRequest) returns (stream EventData) {}
 }
@@ -8,9 +11,10 @@ message EventRequest {
 
 }
 
+// 이벤트 발생 당시의 비디오 영상을 어떻게 보여줄 수 있을까요..?
 message EventData {
   string occurred_time = 1;
-  repeated int32 object_id_list = 2;
+  repeated ObjectType object_type_list = 2;
   int32 camera_id = 3;
-  int32 scenario_id = 4;
+  ScenarioType scenario = 4;
 }

@@ -22,6 +22,7 @@ message CameraData {
   int32 id = 1;
   string name = 2;
   CameraPosition position = 3;
+  // 추론 영상에 대한 정보입니다.
   string rtsp_address = 4;
   int32 rtsp_port = 5;
   string rtsp_connection_id = 6;

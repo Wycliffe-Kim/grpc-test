@@ -9,13 +9,29 @@ message ObjectRequest {
 }
 
 message ObjectData {
-  int32 id = 1;
-  ObjectCoordinate coordinate = 2;
-  repeated ObjectCoordinate trajectory = 3;
-  repeated ObjectCoordinate prediction_path = 4;
+  int32 id = 1; // track id
+  ObjectType type = 2;
+  BoundingBox bbox = 3;
+  repeated Coordinate trajectory = 4;
+  repeated Coordinate prediction_path = 5;
 }
 
-message ObjectCoordinate {
+message BoundingBox {
   float x = 1;
   float y = 2;
+  float width = 3;
+  float height = 4;
+}
+
+message Coordinate {
+  float x = 1;
+  float y = 2;
+}
+
+// 수정될 수 있습니다.
+enum ObjectType {
+  Car = 0;
+  Bus = 1;
+  Truck = 2;
+  Person = 3;
 }
