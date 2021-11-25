@@ -20,6 +20,29 @@ class Queue(Generic[T]):
         
     def pop(self) -> T:
         return self._data_list.pop(0)
+    
+    def pop_all(self) -> list[T]:
+        arr: list[T] = self._data_list.copy()
+        self.clear()
+        return arr
+    
+    def peek(self, count) -> list[T]:
+        arr: list[T] = []
+        
+        i = 0
+        while i < count:
+            arr.append(self._data_list[i])
+            
+        return arr
+    
+    def peek_reverse(self, count) -> list[T]:
+        arr: list[T] = []
+        
+        i = self.count() - count
+        while i < self.count():
+            arr.append(self._data_list[i])
+            
+        return arr
       
     def clear(self):
         self._data_list.clear()
