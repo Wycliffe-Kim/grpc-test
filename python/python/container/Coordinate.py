@@ -1,4 +1,4 @@
-class ObjectCoordinate:
+class Coordinate:
     __x: float
     __y: float
     

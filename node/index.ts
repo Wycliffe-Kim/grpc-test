@@ -126,6 +126,7 @@ function errorCallback(error: any) {
 function main() {
   fs.readdirSync('../proto')
     .map(protoFile => protoFile.replace('.proto', ''))
+    .filter(protoName => protoName !== 'scenario')
     .map(protoName => service(protoName))
     .forEach(_service => {
       (callbacks as any)[`${_service.name}Callback`](_service.handle);

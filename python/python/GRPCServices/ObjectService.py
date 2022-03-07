@@ -1,7 +1,8 @@
 import object_pb2
 import object_pb2_grpc
+from ..container.BoundingBox import BoundingBox
 
-from ..container.ObjectCoordinate import ObjectCoordinate
+from ..container.Coordinate import Coordinate
 from ..container.ObjectData import ObjectData
 from ..module.Queue import Queue
 
@@ -31,16 +32,24 @@ class ObjectService(object_pb2_grpc.ObjectServiceServicer):
     def __to_grpc_object_data(self, object_data: ObjectData):
         return object_pb2.ObjectData(
             id=object_data.id,
-            coordinate=self.__to_grpc_object_coordinate(object_data.coordinate),
+            type=object_data.type,
+            bbox=self.__to_grpc_bounding_box(object_data.bbox),
             trajectory=self.__to_grpc_object_coordinate_list(object_data.trajectory),
             prediction_path=self.__to_grpc_object_coordinate_list(object_data.prediction_path))
         
-    def __to_grpc_object_coordinate(self, object_coordinate: ObjectCoordinate):
-        return object_pb2.ObjectCoordinate(
+    def __to_grpc_bounding_box(self, bbox: BoundingBox):
+        return object_pb2.BoundingBox(
+            x=bbox.x,
+            y=bbox.y,
+            width=bbox.width,
+            height=bbox.height)
+        
+    def __to_grpc_object_coordinate(self, object_coordinate: Coordinate):
+        return object_pb2.Coordinate(
                 x=object_coordinate.x,
                 y=object_coordinate.y)
         
-    def __to_grpc_object_coordinate_list(self, object_coordinate_list: list[ObjectCoordinate]):
+    def __to_grpc_object_coordinate_list(self, object_coordinate_list: list[Coordinate]):
         grpc_object_coordinate_list = []
         for object_coordinate in object_coordinate_list:
             grpc_object_coordinate_list.append(self.__to_grpc_object_coordinate(object_coordinate))

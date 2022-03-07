@@ -1,40 +1,42 @@
 from datetime import datetime
+from ..type.ObjectType import ObjectType
+from ..type.ScenarioType import ScenarioType
 
 class EventData:
     __occurred_time: datetime
-    __object_id_list: list[int]
+    __object_type_list: list[ObjectType]
     __camera_id: int
-    __scenario_id: int
+    __scenario: ScenarioType
     
     def __init__(self,
                  occurred_time: datetime,
-                 object_id_list: list[int],
+                 object_type_list: list[ObjectType],
                  camera_id: int,
-                 scenario_id: int):
+                 scenario: ScenarioType):
         self.__occurred_time = occurred_time
-        self.__object_id_list = object_id_list
+        self.__object_type_list = object_type_list
         self.__camera_id = camera_id
-        self.__scenario_id = scenario_id
+        self.__scenario = scenario
         
     def __str__(self):
         return str(
             f"occurred_time: {self.__occurred_time}, "
-            f"object_id_list: {self.__object_id_list}, "
+            f"object_type_list: {self.__object_type_list}, "
             f"camera_id: {self.__camera_id}, "
-            f"scenario_id: {self.__scenario_id}")
+            f"scenario: {self.__scenario}")
         
     @property
     def occurred_time(self):
         return self.__occurred_time
       
     @property
-    def object_id_list(self):
-        return self.__object_id_list
+    def object_type_list(self):
+        return self.__object_type_list
       
     @property
     def camera_id(self):
         return self.__camera_id
       
     @property
-    def scenario_id(self):
-        return self.__scenario_id
+    def scenario(self):
+        return self.__scenario

@@ -15,7 +15,7 @@ from .store.ScenarioStore import ScenarioStore
 from .type.ScenarioType import ScenarioType
 from .GRPCServices.TestService import TestService
 from .GRPCServices.CameraService import CameraService
-from .GRPCServices.ScenarioService import ScenarioService
+# from .GRPCServices.ScenarioService import ScenarioService
 from .GRPCServices.EventService import EventService
 from .GRPCServices.ObjectService import ObjectService
 from .mock.MockEventGenerator import MockEventGenerator
@@ -28,13 +28,13 @@ def load_cameras():
         CameraStore().set_camera(camera)
 
 def load_scenarios():
-    scenario = ScenarioData(1, ScenarioType.ACCIDENT)
+    scenario = ScenarioData(ScenarioType.ACCIDENT)
     ScenarioStore().set_scenario(scenario)
     
 def register_service(server):
     test_service = TestService()
     camera_service = CameraService()
-    scenario_service = ScenarioService()
+    # scenario_service = ScenarioService()
     event_service = EventService()
     object_service = ObjectService()
     
@@ -46,7 +46,7 @@ def register_service(server):
     
     test_pb2_grpc.add_TestServiceServicer_to_server(test_service, server)
     camera_pb2_grpc.add_CameraServiceServicer_to_server(camera_service, server)
-    scenario_pb2_grpc.add_ScenarioServiceServicer_to_server(scenario_service, server)
+    # scenario_pb2_grpc.add_ScenarioServiceServicer_to_server(scenario_service, server)
     event_pb2_grpc.add_EventServiceServicer_to_server(event_service, server)
     object_pb2_grpc.add_ObjectServiceServicer_to_server(object_service, server)
       

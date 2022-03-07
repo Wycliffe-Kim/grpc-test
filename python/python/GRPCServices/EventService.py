@@ -30,6 +30,6 @@ class EventService(event_pb2_grpc.EventServiceServicer):
     def __to_grpc_event_data(self, event_data: EventData):
         return event_pb2.EventData(
             occurred_time=str(event_data.occurred_time),
-            object_id_list=event_data.object_id_list,
+            object_type_list=event_data.object_type_list,
             camera_id=event_data.camera_id,
-            scenario_id=event_data.scenario_id)
+            scenario=event_data.scenario)

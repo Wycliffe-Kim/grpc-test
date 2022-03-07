@@ -2,7 +2,7 @@ from typing import Callable
 from ..function.generate_random_number import generate_random_number
 from ..module.WorkerThread import WorkerThread
 from ..container.ObjectData import ObjectData
-from ..container.ObjectCoordinate import ObjectCoordinate
+from ..container.Coordinate import Coordinate
 
 class MockObjectGenerator(WorkerThread):
     __callbacks: list[Callable[[ObjectData], None]]
@@ -44,4 +44,4 @@ class MockObjectGenerator(WorkerThread):
         return int(generate_random_number(min=float(min), max=float(max)))
     
     def __generate_random_coordinate(self):
-        return ObjectCoordinate(generate_random_number(), generate_random_number())
+        return Coordinate(generate_random_number(), generate_random_number())
